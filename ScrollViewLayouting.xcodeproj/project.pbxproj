@@ -14,6 +14,7 @@
 		6321EF6119E30F7E00F265ED /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6321EF6019E30F7E00F265ED /* Images.xcassets */; };
 		6321EF6419E30F7E00F265ED /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6321EF6219E30F7E00F265ED /* LaunchScreen.xib */; };
 		6321EF7019E30F7E00F265ED /* ScrollViewLayoutingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6321EF6F19E30F7E00F265ED /* ScrollViewLayoutingTests.m */; };
+		6321EF7B19E313FA00F265ED /* ScrollViewLayoutingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6321EF7A19E313FA00F265ED /* ScrollViewLayoutingManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		6321EF6919E30F7E00F265ED /* ScrollViewLayoutingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScrollViewLayoutingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6321EF6E19E30F7E00F265ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6321EF6F19E30F7E00F265ED /* ScrollViewLayoutingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollViewLayoutingTests.m; sourceTree = "<group>"; };
+		6321EF7919E313FA00F265ED /* ScrollViewLayoutingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewLayoutingManager.h; sourceTree = "<group>"; };
+		6321EF7A19E313FA00F265ED /* ScrollViewLayoutingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewLayoutingManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				6321EF6019E30F7E00F265ED /* Images.xcassets */,
 				6321EF6219E30F7E00F265ED /* LaunchScreen.xib */,
 				6321EF5319E30F7E00F265ED /* Supporting Files */,
+				6321EF7919E313FA00F265ED /* ScrollViewLayoutingManager.h */,
+				6321EF7A19E313FA00F265ED /* ScrollViewLayoutingManager.m */,
 			);
 			path = ScrollViewLayouting;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6321EF7B19E313FA00F265ED /* ScrollViewLayoutingManager.m in Sources */,
 				6321EF5C19E30F7E00F265ED /* ViewController.m in Sources */,
 				6321EF5919E30F7E00F265ED /* AppDelegate.m in Sources */,
 				6321EF5619E30F7E00F265ED /* main.m in Sources */,
@@ -412,6 +418,7 @@
 				6321EF7519E30F7E00F265ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6321EF7619E30F7E00F265ED /* Build configuration list for PBXNativeTarget "ScrollViewLayoutingTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +427,7 @@
 				6321EF7819E30F7E00F265ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
