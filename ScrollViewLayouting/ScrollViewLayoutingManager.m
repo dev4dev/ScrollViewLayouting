@@ -83,15 +83,18 @@
 {
 	view.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.scrollView addSubview:view];
+
+	// horizontal layout
+	NSArray *hc = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
+	[self.scrollView addConstraints:hc];
+
 	if (index < self.views.count) {
 		LayoutItem *indexItem = self.views[index];
 		if (index == 0) {
 			// top item
 			NSArray *vc = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
 			[self.scrollView addConstraints:vc];
-			NSArray *hc = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
-			[self.scrollView addConstraints:hc];
-			
+
 			LayoutItem *item = [[LayoutItem alloc] initWithView:view topConstraint:vc.firstObject];
 			[self.views insertObject:item atIndex:index];
 		} else {
@@ -101,24 +104,19 @@
 			
 			NSArray *vc = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[prevView][view]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(prevView, view)];
 			[self.scrollView addConstraints:vc];
-			NSArray *hc = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
-			[self.scrollView addConstraints:hc];
-			
+
 			LayoutItem *item = [[LayoutItem alloc] initWithView:view topConstraint:vc.firstObject];
 			[self.views insertObject:item atIndex:index];
 		}
+
 		// insert before view
-		
 		[self.scrollView removeConstraint:indexItem.topConstraint];
 		indexItem.topConstraint = nil;
 		UIView *indexView = indexItem.view;
 		NSArray *vc = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[view][indexView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view, indexView)];
 		[self.scrollView addConstraints:vc];
-		
-		
 	} else {
 		// insert as last view
-		NSLog(@"last");
 		if (self.bottomConstraint) {
 			[self.scrollView removeConstraint:self.bottomConstraint];
 			self.bottomConstraint = nil;
@@ -126,13 +124,9 @@
 		
 		if (index == 0) {
 			// to container
-			NSLog(@"container");
-			
 			NSArray *vc = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
 			[self.scrollView addConstraints:vc];
-			NSArray *hc = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
-			[self.scrollView addConstraints:hc];
-			
+
 			LayoutItem *item = [[LayoutItem alloc] initWithView:view topConstraint:vc.firstObject];
 			[self.views insertObject:item atIndex:index];
 		} else {
@@ -142,19 +136,16 @@
 			UIView *prevView = prevItem.view;
 			NSArray *vc = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[prevView][view]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view, prevView)];
 			[self.scrollView addConstraints:vc];
-			NSArray *hc = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
-			[self.scrollView addConstraints:hc];
-			
+
 			LayoutItem *item = [[LayoutItem alloc] initWithView:view topConstraint:vc.firstObject];
 			[self.views insertObject:item atIndex:index];
-
-			NSLog(@"prev");
 		}
 		
 		NSArray *bottomConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[view]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view)];
 		[self.scrollView addConstraints:bottomConstraint];
 		self.bottomConstraint = bottomConstraint.firstObject;
 	}
+	
 	if (animated) {
 		[self.scrollView updateConstraintsIfNeeded];
 		[UIView animateWithDuration:0.25 animations:^{
