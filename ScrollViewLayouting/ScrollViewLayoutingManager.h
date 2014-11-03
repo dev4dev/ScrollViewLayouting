@@ -10,6 +10,8 @@
 
 @interface ScrollViewLayoutingManager : NSObject
 
+@property (nonatomic, strong, readonly) NSArray *subviews;
+
 - (instancetype)initWithScrollView:(UIScrollView *)scrollView;
 
 - (void)appendView:(UIView *)view;
@@ -28,5 +30,6 @@
 
 - (void)removeView:(UIView *)view animated:(BOOL)animated;
 - (void)removeViewAtIndex:(NSUInteger)index animated:(BOOL)animated;
+- (void)removeAllViews;
 
 @end

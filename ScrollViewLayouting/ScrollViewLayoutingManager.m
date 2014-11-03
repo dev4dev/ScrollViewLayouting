@@ -68,6 +68,12 @@
 
 #pragma mark - Properties Getters
 
+- (NSArray *)
+subviews
+{
+	return [self.views copy];
+}
+
 
 #pragma mark - Properties Setters
 
@@ -114,6 +120,7 @@
 		indexItem.topConstraint = nil;
 		UIView *indexView = indexItem.view;
 		NSArray *vc = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[view][indexView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(view, indexView)];
+		indexItem.topConstraint = vc.firstObject;
 		[self.scrollView addConstraints:vc];
 	} else {
 		// insert as last view
@@ -145,7 +152,7 @@
 		[self.scrollView addConstraints:bottomConstraint];
 		self.bottomConstraint = bottomConstraint.firstObject;
 	}
-	
+
 	if (animated) {
 		[self.scrollView updateConstraintsIfNeeded];
 		[UIView animateWithDuration:0.25 animations:^{
@@ -157,13 +164,17 @@
 - (void)insertView:(UIView *)view afterView:(UIView *)afterView animated:(BOOL)animated
 {
 	NSUInteger index = [self indexOfView:afterView];
-	[self insertView:view atIndex:index + 1 animated:animated];
+	if (index != NSNotFound) {
+		[self insertView:view atIndex:index + 1 animated:animated];
+	}
 }
 
 - (void)insertView:(UIView *)view beforeView:(UIView *)beforeView animated:(BOOL)animated
 {
 	NSUInteger index = [self indexOfView:beforeView];
-	[self insertView:view atIndex:index animated:animated];
+	if (index != NSNotFound) {
+		[self insertView:view atIndex:index animated:animated];
+	}
 }
 
 - (NSUInteger)indexOfView:(UIView *)view
@@ -196,7 +207,9 @@
 - (void)removeView:(UIView *)view animated:(BOOL)animated
 {
 	NSUInteger index = [self indexOfView:view];
-	[self removeViewAtIndex:index animated:animated];
+	if (index != NSNotFound) {
+		[self removeViewAtIndex:index animated:animated];
+	}
 }
 
 - (void)removeViewAtIndex:(NSUInteger)index animated:(BOOL)animated
@@ -248,6 +261,12 @@
 	[self removeViewAtIndex:index animated:NO];
 }
 
+- (void)removeAllViews
+{
+	[self.views removeAllObjects];
+	self.bottomConstraint = nil;
+	[self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+}
 
 #pragma mark - Private methods
 
